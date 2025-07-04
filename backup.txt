@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br"> <!-- Define que a linguagem da página é português do Brasil -->
+<head>
+  <!-- Configurações básicas do cabeçalho -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index,follow" />
+
+  <!-- SEO -->
+  <title>Rica Games Vídeos - Assista os melhores vídeos</title>
+  <meta name="description" content="Assista vídeos do Rica Games. Selecione entre vários vídeos exclusivos e únicos." />
+  <meta name="keywords" content="Rica Games, vídeo, YouTube, filmes, vídeos de jogos, entretenimento" />
+
+  <!-- Estilos CSS -->
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ff4500;
+      text-shadow: 1px 1px 3px black;
+    }
+
+    #video-container {
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      margin-bottom: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 15px #ff4500;
+    }
+
+    #video-title {
+      max-width: 800px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #ffcc00;
+      text-shadow: 1px 1px 2px black;
+      min-height: 2.5em;
+    }
+
+    button {
+      background-color: #ff4500;
+      border: none;
+      padding: 12px 25px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-bottom: 40px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e03e00;
+    }
+
+    #unique-string {
+      max-width: 90%;
+      background-color: #111;
+      border-radius: 8px;
+      padding: 15px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #ccc;
+      user-select: text;
+      margin-top: auto;
+    }
+
+    #propaganda-piscante {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #ff4500;
+      color: white;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      animation: piscar 1s infinite alternate;
+      box-shadow: 0 0 10px #ff4500;
+      z-index: 1000;
+      user-select: none;
+    }
+
+    @keyframes piscar {
+      0% {opacity: 1;}
+      100% {opacity: 0.3;}
+    }
+
+    @media (max-width: 600px) {
+      #video-container {
+        max-width: 100%;
+        aspect-ratio: auto;
+        height: 215px;
+      }
+
+      #video-title {
+        font-size: 16px;
+      }
+
+      #propaganda-piscante {
+        font-size: 14px;
+        padding: 8px 12px;
+        top: 10px;
+        right: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Título principal da página -->
+  <h1>Vídeos do Rica Games</h1>
+
+  <!-- Container onde o vídeo será carregado via JavaScript -->
+  <div id="video-container"></div>
+
+  <!-- Título do vídeo carregado -->
+  <div id="video-title">Carregando título...</div>
+
+  <!-- Botão para trocar vídeo aleatório -->
+  <button onclick="trocarVideo()">Trocar Vídeo</button>
+
+  <!-- Texto aleatório no fim da tela para tornar o conteúdo único -->
+  <div id="unique-string">Carregando conteúdo único...</div>
+
+  <!-- Propaganda clicável e piscante no canto da tela -->
+  <div id="propaganda-piscante" onclick="window.open('ads.html', '_blank')">
+    OFERTA IMPERDÍVEL!
+  </div>
+
+  <!-- JavaScript responsável pela lógica da página -->
+  <script>
+    // Lista de vídeos com seus IDs do YouTube e títulos personalizados
+    const videos = [
+      {id:"eQkZtkcVLko",titulo:"O Streamer mais Bizarro do Youtube Brasil"},
+      {id:"Hai4xTnkHqw",titulo:"Rica games foi pego no flagra e disse que só fez duas vezes"},
+      {id: "FapYsd1Sfr0", titulo: "RICA GAMES " },
+      {id:'NHZW7imyTrU',titulo:'rica games no modo deus'},
+      {id:'PR3pvinK_bI',titulo:'Achei a distribuidora que o Rica Games frequentava e foi banido!'},
+      {id:'Q6YW48l0T_Y',titulo:'rica games você já teve namorada?'}
+    
+    ];
+
+    // Retorna um vídeo aleatório da lista
+    function getRandomVideo() {
+      return videos[Math.floor(Math.random() * videos.length)];
+    }
+
+    // Troca o vídeo exibido e atualiza o título
+    function trocarVideo() {
+      const video = getRandomVideo();
+      const container = document.getElementById('video-container');
+      const tituloEl = document.getElementById('video-title');
+
+      container.innerHTML = `<iframe 
+        src="https://www.youtube.com/embed/${video.id}" 
+        allowfullscreen 
+        loading="lazy" 
+        title="${video.titulo}"
+      ></iframe>`;
+
+      tituloEl.textContent = video.titulo;
+    }
+
+    // Gera uma string aleatória com letras, números e caracteres especiais
+    function gerarStringUnica(tamanho = 300) {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+      let resultado = '';
+      for(let i = 0; i < tamanho; i++) {
+        resultado += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return resultado;
+    }
+
+    // Executa ao carregar a página
+    document.addEventListener('DOMContentLoaded', () => {
+      trocarVideo(); // Carrega o vídeo inicial
+      document.getElementById('unique-string').textContent = gerarStringUnica(); // Gera a string aleatória no final
+    });
+  </script>
+  
+</body>
+</html>
